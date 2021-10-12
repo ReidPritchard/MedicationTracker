@@ -677,7 +677,6 @@
                         <outlet property="streak" destination="BVm-dg-wmn" id="gIU-xW-U29"/>
                         <outlet property="take_every" destination="NMd-nZ-wj8" id="vwH-NO-QvX"/>
                         <outlet property="time_till" destination="VID-7s-Dny" id="iOJ-XL-EA6"/>
-                        <outlet property="took_it_cell" destination="cUX-6Q-5Sv" id="AQC-EA-DcF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZd-lO-oJ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

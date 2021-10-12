@@ -21,8 +21,8 @@ class MedicationDetailViewController: UITableViewController {
     @IBOutlet weak var edit_amount: UITextField!
     @IBOutlet weak var edit_interval: UITextField!
     
-    @IBOutlet weak var took_it_cell: UITableViewCell!
-    var took_it_cell_rect_view: UIView!
+//    @IBOutlet weak var took_it_cell: UITableViewCell!
+//    var took_it_cell_rect_view: UIView!
     
     // Static section headers
     let med_name_section_title = "Medication Name"
@@ -34,6 +34,11 @@ class MedicationDetailViewController: UITableViewController {
     // Model classes
     var medication: Medication!
     var med_manager: MedicationManager!
+    
+    // animation variables
+    var sun_view: UIView!
+    var check_shape: CAShapeLayer!
+    var x_shape: CAShapeLayer!
 
     override func viewDidLoad() {
         // Set right nav item as edit button
@@ -44,16 +49,6 @@ class MedicationDetailViewController: UITableViewController {
         // print(medication)
         // print(med_manager)
         
-        // Setup animation for took_it button
-        took_it_cell_rect_view = UIView(frame: CGRect(x: 0, y: 0, width: 0.1, height: 10))
-//        took_it_cell.layer.borderWidth = 15
-        
-        took_it_cell_rect_view.backgroundColor = .systemGreen
-        took_it_cell_rect_view.center = took_it_cell.subviews[0].center
-        
-        took_it_cell.subviews[0].addSubview(took_it_cell_rect_view)
-        took_it_cell.subviews[0].sendSubviewToBack(took_it_cell_rect_view)
-        
         // Create gesture recognizer and connect to dismissKeyboard
          let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         // Add tap gesture to root view
@@ -61,6 +56,64 @@ class MedicationDetailViewController: UITableViewController {
         
         // Setup UI Components
         refresh_info()
+        
+        // Setup animations
+        print("Setup Animations")
+        let smallest_size = self.view.frame.width < self.view.frame.height ? self.view.frame.width : self.view.frame.height
+        let largest_side = self.view.frame.width > self.view.frame.height ? self.view.frame.width : self.view.frame.height
+        sun_view = UIView(frame: CGRect(x: 0, y: 0, width: smallest_size / 3, height: smallest_size / 3))
+        
+        sun_view.layer.cornerRadius = sun_view.frame.width / 2
+        sun_view.layer.borderWidth = smallest_size / 75
+        sun_view.layer.borderColor = CGColor(red: 0.9, green: 0.33, blue: 0.23, alpha: 1)
+        sun_view.backgroundColor = UIColor(cgColor: CGColor(red: 0.9, green: 0.33, blue: 0.23, alpha: 1))
+        
+        // Add x and check
+        // inspiration https://stackoverflow.com/questions/66939021/drawing-checkmark-with-stroke-animation-in-swift
+        let check = UIBezierPath()
+        check.lineWidth = 5
+        check.move(to: CGPoint(x: sun_view.bounds.midX - 30, y: sun_view.bounds.midY + 5))
+        check.addLine(to: CGPoint(x: sun_view.bounds.midX, y: sun_view.bounds.midY + 30))
+        check.addLine(to: CGPoint(x: sun_view.bounds.midX + 30, y: sun_view.bounds.midY - 20))
+        
+        // https://stackoverflow.com/questions/31728924/ios-draw-bezier-path-in-subview
+        check_shape = CAShapeLayer()
+        check_shape.path = check.cgPath
+        check_shape.lineWidth = smallest_size / 75
+        check_shape.strokeColor = UIColor.systemGreen.cgColor
+        check_shape.fillColor = UIColor.init(white: 1, alpha: 0).cgColor
+        check_shape.strokeEnd = 0
+
+        let check_view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        check_view.layer.addSublayer(check_shape)
+        
+        let x = UIBezierPath()
+        let x_length = CGFloat(30)
+        x.lineWidth = 5
+        x.move(to: CGPoint(x: sun_view.bounds.midX - x_length, y: sun_view.bounds.midY - x_length))
+        x.addLine(to: CGPoint(x: sun_view.bounds.midX + x_length, y: sun_view.bounds.midY + x_length))
+        x.move(to: CGPoint(x: sun_view.bounds.midX - x_length, y: sun_view.bounds.midY + x_length))
+        x.addLine(to: CGPoint(x: sun_view.bounds.midX + x_length, y: sun_view.bounds.midY - x_length))
+        
+        x_shape = CAShapeLayer()
+        x_shape.path = x.cgPath
+        x_shape.lineWidth = smallest_size / 75
+        x_shape.strokeColor = UIColor.systemRed.cgColor
+        x_shape.fillColor = UIColor.init(white: 1, alpha: 0).cgColor
+        x_shape.strokeEnd = 0
+        
+        let x_view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        x_view.layer.addSublayer(x_shape)
+
+        sun_view.addSubview(check_view)
+        sun_view.addSubview(x_view)
+        
+        sun_view.center = tableView.center
+        let transform_down = CGAffineTransform(translationX: 0, y: largest_side * 0.5)
+        sun_view.transform = transform_down
+        print(sun_view.subviews)
+        tableView.addSubview(sun_view)
+        tableView.sendSubviewToBack(sun_view)
         
         // Run super view did load
         super.viewDidLoad()
@@ -159,13 +212,6 @@ class MedicationDetailViewController: UITableViewController {
         }
     }
 
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return editState ? CGFloat(20) : CGFloat()
-//        }
-//        return CGFloat(20)
-//    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return editState ? 1 : 0
@@ -180,55 +226,59 @@ class MedicationDetailViewController: UITableViewController {
 
     
     @IBAction func took_medication(_ sender: Any) {
-        let x_full_scale = CGAffineTransform(scaleX: CGFloat(1), y: CGFloat(1)).scaledBy(x: 10000, y: 1)
-        let y_full_scale = CGAffineTransform(scaleX: CGFloat(1), y: CGFloat(1)).scaledBy(x: 10000, y: 50)
-        let shrunk = CGAffineTransform(scaleX: CGFloat(1), y: CGFloat(1))
+        let largest_size = self.view.frame.width > self.view.frame.height ? self.view.frame.width : self.view.frame.height
         
-        self.took_it_cell_rect_view.backgroundColor = .systemGreen
-        self.took_it_cell_rect_view.alpha = 0
+        let original_transform = CGAffineTransform(translationX: 0, y: largest_size * 0.5)
+        let original_color = self.sun_view.backgroundColor
+        let slide_in = self.sun_view.transform.translatedBy(x: 0, y: -largest_size / 2.5)
         
-        self.took_it_cell_rect_view.frame.size.width = 0.1
-        self.took_it_cell_rect_view.frame.size.height = 10
-        self.took_it_cell_rect_view.alpha = 0
+        // reset x and check strokes
+        check_shape.strokeStart = 0
+        check_shape.strokeEnd = 0
         
-        print(self.took_it_cell_rect_view.transform)
-
-        UIView.animateKeyframes(withDuration: 0.7, delay: 0, animations: {
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.3, animations: {
-                self.took_it_cell_rect_view.alpha = 1
-                self.took_it_cell_rect_view.transform = x_full_scale
-                print(self.took_it_cell_rect_view.frame.width, self.took_it_cell_rect_view.frame.height)
-            })
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.4, animations: {
-                self.took_it_cell_rect_view.transform = y_full_scale
-                print(self.took_it_cell_rect_view.frame.width, self.took_it_cell_rect_view.frame.height)
-            })
-            
-        }, completion: {_ in
-            
-            self.confirm_taken_med(msg: "Just making sure you took your meds!", title: "Confirm", callback: { res in
-                self.took_it_cell_rect_view.transform = y_full_scale
-                
+        x_shape.strokeStart = 0
+        x_shape.strokeEnd = 0
+        
+        
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: [], animations: {
+            self.sun_view.transform = slide_in
+        })
+        
+        UIView.animate(withDuration: 0.35, delay: 0.15, animations: {
+            self.sun_view.backgroundColor = UIColor(cgColor: CGColor(red: 0.9, green: 0.33, blue: 0.23, alpha: 0))
+        }, completion: { _ in
+            self.confirm_taken_med(msg: "Just want to make sure you have taken your meds.", title: "Confirm taken medication", callback: {res in
+                print(res)
+                    
+                // Start animation
                 UIView.animateKeyframes(withDuration: 1, delay: 0, options: [], animations: {
-                    if !res {
-                        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4,  animations: {
-                            self.took_it_cell_rect_view.backgroundColor = .systemRed
+                    
+                    if res {
+                        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
+                            self.sun_view.layer.borderColor = UIColor.systemGreen.cgColor
+                            self.check_shape.strokeEnd = 1
+                        })
+                    } else {
+                        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
+                            self.sun_view.layer.borderColor = UIColor.systemRed.cgColor
+                            self.x_shape.strokeEnd = 1
                         })
                     }
-                    UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.3,  animations: {
-                        self.took_it_cell_rect_view.transform = x_full_scale
-                        print(self.took_it_cell_rect_view.frame.width, self.took_it_cell_rect_view.frame.height)
-
+                   
+                    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.2, animations: { 
+                        self.sun_view.transform = original_transform
                     })
                     
-                    UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.6,  animations: {
-                        self.took_it_cell_rect_view.alpha = 0
-                        self.took_it_cell_rect_view.transform = shrunk
-                        print(self.took_it_cell_rect_view.frame.width, self.took_it_cell_rect_view.frame.height)
-
+                }, completion: {_ in
+                    
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.sun_view.layer.borderColor = original_color?.cgColor
+                        self.sun_view.backgroundColor = original_color
+                        
+                        self.check_shape.strokeStart = 1
+                        self.x_shape.strokeStart = 1
                     })
+                    
                 })
             })
         })

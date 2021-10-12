@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220D16AE2713886E00394974 /* HrMinPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D16AD2713886E00394974 /* HrMinPicker.swift */; };
 		221C0BDF26DEEF5600C927E5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C0BDE26DEEF5600C927E5 /* HomeViewController.swift */; };
 		221C0BE526DEF02500C927E5 /* MedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C0BE426DEF02500C927E5 /* MedicationViewController.swift */; };
 		22484C3826F398680076F542 /* NewMedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22484C3726F398680076F542 /* NewMedicationViewController.swift */; };
@@ -19,11 +18,9 @@
 		229C935326D815EB0019A6E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 229C935126D815EB0019A6E4 /* Main.storyboard */; };
 		229C935526D815EC0019A6E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 229C935426D815EC0019A6E4 /* Assets.xcassets */; };
 		229C935826D815EC0019A6E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 229C935626D815EC0019A6E4 /* LaunchScreen.storyboard */; };
-		22A27FA8270F56B900B31287 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A27FA7270F56B900B31287 /* LaunchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		220D16AD2713886E00394974 /* HrMinPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HrMinPicker.swift; sourceTree = "<group>"; };
 		221C0BDE26DEEF5600C927E5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		221C0BE426DEF02500C927E5 /* MedicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationViewController.swift; sourceTree = "<group>"; };
 		22484C3726F398680076F542 /* NewMedicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMedicationViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +34,6 @@
 		229C935426D815EC0019A6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		229C935726D815EC0019A6E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		229C935926D815EC0019A6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22A27FA7270F56B900B31287 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,15 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		220D16AF2713887700394974 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				220D16AD2713886E00394974 /* HrMinPicker.swift */,
-			);
-			name = Components;
-			path = ViewControllers/Components;
-			sourceTree = "<group>";
-		};
 		2283E7A526E55D42003EAE27 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +63,6 @@
 				221C0BDE26DEEF5600C927E5 /* HomeViewController.swift */,
 				2283E7A226E52BBD003EAE27 /* MeViewController.swift */,
 				226ADF4B26F0F60A002F9350 /* MedicationDetailViewController.swift */,
-				22A27FA7270F56B900B31287 /* LaunchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -103,7 +89,6 @@
 				229C934B26D815EB0019A6E4 /* AppDelegate.swift */,
 				229C934D26D815EB0019A6E4 /* SceneDelegate.swift */,
 				229C935126D815EB0019A6E4 /* Main.storyboard */,
-				220D16AF2713887700394974 /* Components */,
 				2283E7A626E55D51003EAE27 /* ViewControllers */,
 				2283E7A526E55D42003EAE27 /* Models */,
 				229C935426D815EC0019A6E4 /* Assets.xcassets */,
@@ -191,11 +176,9 @@
 				221C0BDF26DEEF5600C927E5 /* HomeViewController.swift in Sources */,
 				226ADF4C26F0F60A002F9350 /* MedicationDetailViewController.swift in Sources */,
 				22484C3826F398680076F542 /* NewMedicationViewController.swift in Sources */,
-				220D16AE2713886E00394974 /* HrMinPicker.swift in Sources */,
 				221C0BE526DEF02500C927E5 /* MedicationViewController.swift in Sources */,
 				229C934C26D815EB0019A6E4 /* AppDelegate.swift in Sources */,
 				229C934E26D815EB0019A6E4 /* SceneDelegate.swift in Sources */,
-				22A27FA8270F56B900B31287 /* LaunchViewController.swift in Sources */,
 				22549EA326E121A2009BE8FF /* MedicationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -267,7 +267,7 @@ class MedicationViewController: UIViewController, UITableViewDataSource, UITable
                     
                     if res {
                         UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
-                            self.sun_view.layer.borderColor = CGColor(red: 0.3, green: 0.9, blue: 0.23, alpha: 1)
+                            self.sun_view.layer.borderColor = UIColor.systemGreen.cgColor
                             self.check_shape.strokeEnd = 1
                         })
                     } else {
