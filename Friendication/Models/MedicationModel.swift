@@ -83,6 +83,7 @@ class Medication: Codable {
 
 class MedicationManager {
     var meds_data: [Medication]
+    // Persistent data https://stackoverflow.com/questions/44646186/save-file-in-document-directory-in-swift-3
     let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("medication_save").appendingPathExtension("plist")
     let protectionLevel = Data.WritingOptions.completeFileProtection
     let encoder = JSONEncoder()
@@ -183,6 +184,7 @@ class MedicationManager {
         
         if (encoded_meds != nil) {
             do {
+                // Protection level choice https://stackoverflow.com/questions/37926333/swift-encryption-of-a-file-or-plain-text
                 try encoded_meds?.write(to: self.fileURL, options: [self.protectionLevel, NSData.WritingOptions.atomic])
             } catch {
                 print("There was an error \(error)")

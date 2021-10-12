@@ -154,7 +154,7 @@
                                                 <constraint firstItem="dwl-O4-l8b" firstAttribute="top" secondItem="LU0-8c-3lY" secondAttribute="topMargin" id="pi3-0A-vIa"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" systemColor="quaternarySystemFillColor"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                         <connections>
                                             <outlet property="Description" destination="EjG-dA-xZk" id="8IA-j4-30g"/>
                                             <outlet property="NextDose" destination="gWH-3t-CcQ" id="ZUe-pF-GIy"/>
@@ -179,6 +179,7 @@
                             <constraint firstItem="1G1-n6-NqV" firstAttribute="top" secondItem="rQo-EA-o0s" secondAttribute="top" constant="10" id="AHn-JS-yRl"/>
                             <constraint firstItem="oV5-Bq-vnp" firstAttribute="top" secondItem="1G1-n6-NqV" secondAttribute="bottom" constant="38" id="BXH-dI-aZP"/>
                             <constraint firstItem="NSt-K6-gVI" firstAttribute="leading" secondItem="Lil-3s-5ad" secondAttribute="leading" id="MdS-Xf-Nli"/>
+                            <constraint firstItem="NSt-K6-gVI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1G1-n6-NqV" secondAttribute="bottom" constant="200" id="One-xi-u1g"/>
                             <constraint firstItem="oV5-Bq-vnp" firstAttribute="centerX" secondItem="Lil-3s-5ad" secondAttribute="centerX" id="fAK-CL-eSx"/>
                             <constraint firstItem="rQo-EA-o0s" firstAttribute="bottom" secondItem="oV5-Bq-vnp" secondAttribute="bottom" constant="80" id="rwH-n5-WDA"/>
                             <constraint firstItem="oV5-Bq-vnp" firstAttribute="leading" secondItem="rQo-EA-o0s" secondAttribute="leading" constant="16" id="slP-lU-w0v"/>
@@ -738,8 +739,8 @@
         <image name="justMountains" width="800.5" height="800.5"/>
         <image name="mountainGraphic" width="800.5" height="800.5"/>
         <image name="pills.fill" catalog="system" width="128" height="106"/>
-        <systemColor name="quaternarySystemFillColor">
-            <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
